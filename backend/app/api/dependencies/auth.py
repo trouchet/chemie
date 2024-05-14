@@ -13,3 +13,4 @@ TokenDependency = Annotated[str, Depends(reusable_oauth2)]
 
 # Dependency to get password form
 PasswordFormDependency = Annotated[OAuth2PasswordRequestForm, Depends()]
+

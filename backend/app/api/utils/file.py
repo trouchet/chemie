@@ -13,6 +13,9 @@ def extend_filename(filename: str, token: str, delimiter: str = ".") -> str:
     Estende o nome do arquivo adicionando um token antes da extensão,
     mantendo o nome original e a extensão.
     """
+    if(delimiter=="."):
+        if(len(filename.split(".")) == 1):
+            return filename + "_" + token
 
     extension = filename.split(delimiter)[-1]
     body = filename.split(delimiter)[:-1]

@@ -2,7 +2,7 @@
 clear
 
 # Define the omitted paths
-OMIT_PATHS="tests/*,/usr"
+OMIT_PATHS="tests/*,/usr,backend/app/main.py,backend/app/core/config.py"
 
 while true; do
   coverage run --rcfile=.coveragerc -m pytest

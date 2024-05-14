@@ -15,7 +15,7 @@ def get_files_sorted_by_mtime(directory_path: str) -> List[Tuple[float, Path]]:
         List[Tuple[float, Path]]: A list of tuples containing modification time and Path objects.
     """
     files = [
-        (Path.getmtime(file_path), Path(file_path))
+        (Path(file_path).lstat().st_mtime, Path(file_path))
         for file_path in Path(directory_path).iterdir()
         if file_path.is_file()
     ]
@@ -45,9 +45,10 @@ def manage_files(
     # Check if either limit is exceeded
     if len(files) > max_files or total_size > max_size_mb * 1024 * 1024:
         # Delete files until both limits are met (or list is empty)
-        while len(files) > max_files or total_size > max_size_mb * 1024 * 1024:
-            oldest_file, _ = files.pop(0)
+        while len(files) > max_files or total_size > max_size_mb * 1024 * 1024:            
+            _, oldest_file = files.pop(0)
             oldest_file.unlink()
+            
             total_size -= oldest_file.stat().st_size
 
 

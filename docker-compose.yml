@@ -1,29 +1,12 @@
   version: "3.9"
 
   services:
-    db:
-      image: postgres:16
-      restart: always
-      volumes:
-        - ./postgres/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
-        - pgdata:/var/lib/postgresql/data:cached
-      env_file:
-        - .env
-      ports:
-        - "${POSTGRES_PORT}:5432"
-      environment:
-        - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}
-        - POSTGRES_USER=${POSTGRES_USER?Variable not set}
-        - POSTGRES_DB=${POSTGRES_DB?Variable not set}
-
     adminer:
       image: adminer
       restart: always
       networks:
         - traefik-public
         - default
-      depends_on:
-        - db
       environment:
         - ADMINER_DESIGN=pepa-linha-dark
       labels:
@@ -45,9 +28,6 @@
       build:
         context: .
         dockerfile: ./Dockerfile
-      depends_on:
-        db:
-          condition: service_healthy
       env_file: ".env"
       environment:
         - DOMAIN=${DOMAIN}

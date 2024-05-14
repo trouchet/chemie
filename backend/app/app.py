@@ -61,12 +61,14 @@ def setup_app(app_):
 
     # Set all CORS enabled origins
     if settings.BACKEND_CORS_ORIGINS:
+        origins=[
+            str(origin).strip("/") for origin in settings.BACKEND_CORS_ORIGINS
+        ]
+        
         app_.add_middleware(
             CORSMiddleware,
-            allow_origins=[
-                str(origin).strip("/") for origin in settings.BACKEND_CORS_ORIGINS
-            ],
-            allow_credentials=True,
+            allow_origins=origins,
+            allow_credentials=True, 
             allow_methods=["*"],
             allow_headers=["*"],
         )

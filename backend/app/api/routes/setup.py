@@ -7,11 +7,6 @@ from backend.app.core.config import settings
 router = APIRouter()
 
 
-@router.get("/ping")
-async def pong():
-    return {"message": "pong"}
-
-
 @router.get("/health")
 async def health_check():
     return dict(
@@ -33,8 +28,3 @@ async def info():
         "description": config["tool"]["poetry"]["description"],
     }
 
-
-@router.get("/sentry-debug")
-async def trigger_error():
-    division_by_zero = 1 / 0
-    return division_by_zero

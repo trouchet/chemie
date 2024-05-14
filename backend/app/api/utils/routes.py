@@ -26,9 +26,3 @@ def make_error_response(content_: dict):
         JSONResponse: Uma resposta de erro com o conteúdo especificado.
     """
     return make_json_response(400, content_)
-
-
-def save_client_data(provider_id: str, client_id: str, file: UploadFile):
-    file_path = f"uploads/{provider_id}_{client_id}_{file.filename}"
-    with open(file_path, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)

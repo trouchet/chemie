@@ -23,9 +23,7 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 def create_access_token(subject: Union[str, Any], expires_delta: timedelta) -> str:
     expire = datetime.now() + expires_delta
     to_encode = {"exp": expire, "sub": str(subject)}
-    encoded_jwt = encode(
-        to_encode, settings.SECRET_KEY, algorithm=settings.JWT_ALGORITHM
-    )
+    encoded_jwt = encode(to_encode, settings.SECRET_KEY, algorithm=settings.JWT_ALGORITHM)
     return encoded_jwt
 
 

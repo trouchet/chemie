@@ -4,14 +4,6 @@ import toml
 from backend.app import settings
 
 
-def test_pong(client):
-    route = f"{settings.API_V1_STR}/ping"
-    response = client.get(route)
-
-    assert response.status_code == 200
-    assert response.json() == {"message": "pong"}
-
-
 def test_health_check(client):
     with open("pyproject.toml", "r") as f:
         config = toml.load(f)

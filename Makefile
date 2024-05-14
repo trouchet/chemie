@@ -46,6 +46,9 @@ install: ## Installs the python requirements. Usage: make install
 build: sanitize ## Builds the application. Usage: make build
 	docker-compose build --no-cache
 
+db-test: ## Host database for test
+	docker compose -f docker-compose.db.yml up -d
+
 run: ## Run the application. Usage: make run
 	uvicorn backend.app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
 
